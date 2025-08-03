@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { FaFlask, FaIndustry, FaCheckCircle, FaTruckMoving, FaMapMarkerAlt } from 'react-icons/fa';
-import doctorImg from '../assets/doctor.png';
+import doctorImg from '../assets/Doctor.png';
 import bgVideo from '../assets/dna.mp4'; // background video
 
 const textVariant = {
