@@ -37,9 +37,9 @@ const HomeScreen = () => {
         <HeroSection />
       </SectionWrapper>
 
-      <SectionWrapper>
+      {/* <SectionWrapper>
         <WhatWeDoSection />
-      </SectionWrapper>
+      </SectionWrapper> */}
 
       <SectionWrapper>
         <DiscoverSection />
