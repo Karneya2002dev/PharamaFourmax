@@ -14,16 +14,10 @@ const links = [
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState('HOME');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const current = links.find(link => link.path === location.pathname);
-    if (current) setActive(current.name);
-  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,21 +57,30 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-5">
-              {links.map(link => (
-                <NavLink
-                  key={link.name}
-                  to={link.path}
-                  onClick={() => setActive(link.name)}
-                  className={({ isActive }) =>
-                    `group relative transition-all text-sm font-medium ${
-                      isActive ? 'text-sky-500 font-bold' : 'text-sky-500'
-                    } hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#FF0066] hover:to-[#9900FF]`
-                  }
-                >
-                  {link.name}
-                  <span className="block h-0.5 bg-gradient-to-r from-[#FF0066] to-[#9900FF] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 mt-1" />
-                </NavLink>
-              ))}
+              {links.map(link => {
+                const isHomeGroupActive =
+                  link.name === 'HOME' &&
+                  (location.pathname === '/' || location.pathname === '/about');
+
+                return (
+                  <NavLink
+                    key={link.name}
+                    to={link.path}
+                    end={link.path === '/'}
+                    className={({ isActive }) => {
+                      const active = isActive || isHomeGroupActive;
+                      return `group relative transition-all text-sm font-medium ${
+                        active
+                          ? 'text-sky-500 font-bold'
+                          : 'text-sky-500'
+                      } hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#FF0066] hover:to-[#9900FF]`;
+                    }}
+                  >
+                    {link.name}
+                    <span className="block h-0.5 bg-gradient-to-r from-[#FF0066] to-[#9900FF] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 mt-1" />
+                  </NavLink>
+                );
+              })}
             </div>
 
             {/* Hamburger Menu */}
@@ -99,23 +102,29 @@ const Navbar = () => {
                 className="md:hidden overflow-hidden mt-2"
               >
                 <div className="flex flex-col px-4 py-3 space-y-3 bg-transparent">
-                  {links.map(link => (
-                    <NavLink
-                      key={link.name}
-                      to={link.path}
-                      onClick={() => {
-                        setActive(link.name);
-                        setMenuOpen(false);
-                      }}
-                      className={({ isActive }) =>
-                        `group relative transition-all text-sm font-medium bg-gradient-to-r from-[#FF0066] to-[#9900FF] bg-clip-text text-transparent 
-                        ${isActive ? 'font-bold' : ''}`
-                      }
-                    >
-                      {link.name}
-                      <span className="block h-0.5 bg-gradient-to-r from-[#FF0066] to-[#9900FF] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 mt-1" />
-                    </NavLink>
-                  ))}
+                  {links.map(link => {
+                    const isHomeGroupActive =
+                      link.name === 'HOME' &&
+                      (location.pathname === '/' || location.pathname === '/about');
+
+                    return (
+                      <NavLink
+                        key={link.name}
+                        to={link.path}
+                        end={link.path === '/'}
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) => {
+                          const active = isActive || isHomeGroupActive;
+                          return `group relative transition-all text-sm font-medium bg-gradient-to-r from-[#FF0066] to-[#9900FF] bg-clip-text text-transparent ${
+                            active ? 'font-bold' : ''
+                          }`;
+                        }}
+                      >
+                        {link.name}
+                        <span className="block h-0.5 bg-gradient-to-r from-[#FF0066] to-[#9900FF] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 mt-1" />
+                      </NavLink>
+                    );
+                  })}
                 </div>
               </motion.div>
             )}

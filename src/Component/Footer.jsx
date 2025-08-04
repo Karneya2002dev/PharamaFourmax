@@ -3,12 +3,13 @@ import {
   FaWhatsapp,
   FaInstagram,
   FaFacebookF,
-  FaTwitter,
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
 } from 'react-icons/fa';
-import logo from '../assets/logoo.png';
+import { FaXTwitter } from 'react-icons/fa6';
+import logo from '../assets/logoo.png'; // Company logo
+import marqwonLogo from '../assets/marqwonlogo.png'; // Optional: Marqwon logo
 
 const socialIcons = [
   {
@@ -27,15 +28,15 @@ const socialIcons = [
     hoverColor: 'hover:text-[#1877F2]',
   },
   {
-    icon: <FaTwitter />,
+    icon: <FaXTwitter />,
     href: 'https://twitter.com/your-handle',
-    hoverColor: 'hover:text-sky-500',
+    hoverColor: 'hover:text-black',
   },
 ];
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0b1e3d] text-white py-10 px-6">
+    <footer className="bg-[#0b1e3d] text-white pt-10 px-6 pb-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
 
         {/* Logo & Copyright */}
@@ -46,7 +47,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Social Icons with Hover Effects */}
+        {/* Social Icons */}
         <div className="flex flex-col items-center space-y-4">
           <h3 className="font-semibold text-lg">Connect With Us</h3>
           <div className="flex space-x-5">
@@ -90,6 +91,24 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Developed by Marqwon */}
+      {/* Developed by Marqwon */}
+<div className="mt-8 text-center">
+  <a
+    href="https://marqwon.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center justify-center text-lg sm:text-xl font-semibold text-white animate-pulse hover:text-blue-300 transition duration-300"
+  >
+    <img src={marqwonLogo} alt="Marqwon" className="h-6 w-auto mr-2" />
+    Developed by 
+    <span className="ml-2 text-gradient bg-gradient-to-r from-[#00c6ff] to-[#0072ff] bg-clip-text text-transparent">
+      Marqwon
+    </span>
+  </a>
+</div>
+
     </footer>
   );
 };
